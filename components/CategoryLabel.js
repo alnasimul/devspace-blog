@@ -1,5 +1,6 @@
 import Link from "next/link";
 const CategoryLabel = ({ children }) => {
+
   const colorKey = {
     JavaScript: "yellow",
     CSS: "blue",
