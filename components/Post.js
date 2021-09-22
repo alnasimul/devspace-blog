@@ -2,19 +2,18 @@ import Link from "next/link";
 import Image from "next/image";
 import CategoryLabel from "./CategoryLabel";
 
-const Post = ({ post }) => {
+const Post = ({ post, compact }) => {
   const { slug, frontmatter } = post;
   return (
     <div className="w-full px-10 py-6 bg-white rounded-lg shadow-md mt-6">
-      <Image
+     {!compact && (  <Image
         src={frontmatter.cover_image}
         alt=""
         height={420}
         width={600}
         className="mb-4 rounded"
-      />
-
-      {/* <img
+      />)}
+     {/* <img
         src={frontmatter.cover_image}
         alt=""
         height={420}
@@ -34,7 +33,7 @@ const Post = ({ post }) => {
         </Link>
         <p className="mt-2 text-gray-600">{frontmatter.excerpt}</p>
       </div>
-      <div className="flex justify-between items-center mt-6">
+      { !compact && (<div className="flex justify-between items-center mt-6">
         <Link href={`/blog/${slug}`}>
           <a className="text-gray-900 hover:text-blue-600">Read More</a>
         </Link>
@@ -46,7 +45,7 @@ const Post = ({ post }) => {
           />
           <h3 className="text-gray-700 font-bold">{post.frontmatter.author}</h3>
         </div>
-      </div>
+      </div>)}
     </div>
   );
 };
