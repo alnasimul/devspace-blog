@@ -4,16 +4,24 @@ import Layout from "@/components/Layout";
 import Post from '@/components/Post';
 import matter from 'gray-matter';
 import { getPosts } from '@/lib/posts';
+import CategoryList from '@/components/CategoryList';
 
-export default function CategoryBlogPage({posts, categoryName}) {
+export default function CategoryBlogPage({posts, categoryName, categories}) {
   //console.log(posts);
   return (
     <Layout>
-      <h1 className='text-5xl border-b-4 p-5 font-bold'>Post in {categoryName}</h1>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {
-            posts.map((post, index) => <Post key={post.slug} post={post}/>)
-          }
+      <div className="block justify-between sm:flex">
+        <div className="w-full mr-10 sm:w-3/4">
+        <h1 className='text-5xl border-b-4 p-5 font-bold'>Post in {categoryName}</h1>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {posts.map((post, index) => (
+              <Post key={index} post={post} />
+            ))}
+          </div>
+        </div>
+        <div className="w-full sm:w-1/4">
+          <CategoryList categories={categories}/>
+        </div>
       </div>
     </Layout>
   )
@@ -47,6 +55,12 @@ export const getStaticProps = async ({params: {category_name}}) => {
 
   const posts = getPosts();
 
+  //Get categories for sidebar
+
+  const categories = posts.map((post) => post.frontmatter.category);
+
+  const uniqueCategories = [...new Set(categories)];
+
   const categoryPosts = posts.filter( post => post.frontmatter.category.toLowerCase() === category_name);
 
 
@@ -54,6 +68,7 @@ export const getStaticProps = async ({params: {category_name}}) => {
     props: {
       posts: categoryPosts,
       categoryName: category_name,
+      categories: uniqueCategories
 
     },
   }

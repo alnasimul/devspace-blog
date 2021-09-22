@@ -13,6 +13,15 @@ const Post = ({ post }) => {
         width={600}
         className="mb-4 rounded"
       />
+
+      {/* <img
+        src={frontmatter.cover_image}
+        alt=""
+        height={420}
+        width={600}
+        className="mb-4 rounded"
+      /> */}
+
       <div className="flex justify-between items-center">
         <span className="forn-light text-gray-600">{frontmatter.date}</span>
         <CategoryLabel>{frontmatter.category}</CategoryLabel>
