@@ -17,6 +17,8 @@ ol {
 
 .blog-text pre {
   background: #f4f4f4;
+  overflow: scroll;
+  color: rgb(250, 67, 11);
   padding: 20px;
   margin: 20px 0;
   line-height: 2.3;
